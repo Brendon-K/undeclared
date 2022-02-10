@@ -11,6 +11,6 @@ let answers_url = "https://raw.githubusercontent.com/Brendon-K/undeclared/main/w
 const answers_promise = read_txt_webpage(answers_url);
 
 console.log("waiting for promise")
-$.when(guesses_promise, answers_promise).done(function{
+$.when(guesses_promise, answers_promise).done(function(){
   console.log("promise received");
 });
