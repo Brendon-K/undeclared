@@ -5,4 +5,9 @@ async function read_nonsense() {
   console.log(data);
 }
 
-read_nonsense();
+const guesses_promise = read_nonsense();
+
+console.log("waiting for promise")
+$.when(guesses_promise).done(function{
+  console.log("promise received");
+});
