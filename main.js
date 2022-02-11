@@ -23,4 +23,5 @@ $.when(guesses_promise, answers_promise).done(function(){
   let bad_letters = [];
   // guess soare first
   make_guess(1, "soare");
+  console.log(guesses_promise);
 });
