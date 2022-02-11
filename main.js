@@ -20,8 +20,17 @@ let answers_url = "https://raw.githubusercontent.com/Brendon-K/undeclared/main/w
 const answers_promise = read_txt_webpage(answers_url);
 
 $.when(guesses_promise, answers_promise).done(function(){
+  guesses_promise.then(function(result) {
+    valid_guesses = data.split("\n");
+  });
+
+  answers_promise.then(function(result) {
+    valid_answers = data.split("\n");
+  });
   let bad_letters = [];
   // guess soare first
   make_guess(1, "soare");
-  console.log(guesses_promise);
+  console.log(valid_guesses);
+  console.log(valid_answers);
+
 });
