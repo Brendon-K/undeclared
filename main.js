@@ -13,6 +13,17 @@ function enter_guess(guess_num, word) {
   });
 }
 
+$(".word").children().click(function(){
+  if ($(this).hasClass("definitely")) {
+    $(this).removeClass("definitely");
+  } else if ($(this).hasClass("maybe")) {
+    $(this).removeClass("maybe");
+    $(this).addClass("definitely");
+  } else {
+    $(this).addClass("maybe");
+  }
+});
+
 let guesses_url = "https://raw.githubusercontent.com/Brendon-K/undeclared/main/wordle_guesses.txt"
 const guesses_promise = read_txt_webpage(guesses_url).then(function(result) {
   valid_guesses = result.split("\n");
@@ -27,15 +38,4 @@ $.when(guesses_promise, answers_promise).done(function(){
   let bad_letters = [];
   // guess soare first
   enter_guess(1, "soare");
-});
-
-$(".word").children().click(function(){
-  if ($(this).hasClass("definitely")) {
-    $(this).removeClass("definitely");
-  } else if ($(this).hasClass("maybe")) {
-    $(this).removeClass("maybe");
-    $(this).addClass("definitely");
-  } else {
-    $(this).addClass("maybe");
-  }
 });
