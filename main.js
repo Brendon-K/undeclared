@@ -14,19 +14,16 @@ function make_guess(guess_num, word) {
 }
 
 let guesses_url = "https://raw.githubusercontent.com/Brendon-K/undeclared/main/wordle_guesses.txt"
-const guesses_promise = read_txt_webpage(guesses_url);
+const guesses_promise = read_txt_webpage(guesses_url).then(function(result) {
+  valid_guesses = result.split("\n");
+});
 
 let answers_url = "https://raw.githubusercontent.com/Brendon-K/undeclared/main/wordle_answers.txt"
-const answers_promise = read_txt_webpage(answers_url);
+const answers_promise = read_txt_webpage(answers_url).then(function(result) {
+  valid_answers = result.split("\n");
+});
 
 $.when(guesses_promise, answers_promise).done(function(){
-  guesses_promise.then(function(result) {
-    valid_guesses = result.split("\n");
-  });
-
-  answers_promise.then(function(result) {
-    valid_answers = result.split("\n");
-  });
   let bad_letters = [];
   // guess soare first
   make_guess(1, "soare");
