@@ -7,7 +7,7 @@ async function read_txt_webpage(url) {
   return data;
 }
 
-function make_guess(guess_num, word) {
+function enter_guess(guess_num, word) {
   $("#guess" + guess_num).children().each(function(index){
     $(this).html(word[index]);
   });
@@ -26,8 +26,17 @@ const answers_promise = read_txt_webpage(answers_url).then(function(result) {
 $.when(guesses_promise, answers_promise).done(function(){
   let bad_letters = [];
   // guess soare first
-  make_guess(1, "soare");
-  console.log(valid_guesses);
-  console.log(valid_answers);
+  enter_guess(1, "soare");
+});
 
+$(".word").children().click(function(){
+  $(this).css('background-color', '#ff0000');
+  if ($(this).hasClass("definitely")) {
+    $(this).removeClass("definitely");
+  } else if ($(this).hasClass("maybe")) {
+    $(this).removeClass("maybe");
+    $(this).addClass("definitely");
+  } else {
+    $(this).addClass("maybe");
+  }
 });
