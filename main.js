@@ -21,11 +21,11 @@ const answers_promise = read_txt_webpage(answers_url);
 
 $.when(guesses_promise, answers_promise).done(function(){
   guesses_promise.then(function(result) {
-    valid_guesses = data.split("\n");
+    valid_guesses = result.split("\n");
   });
 
   answers_promise.then(function(result) {
-    valid_answers = data.split("\n");
+    valid_answers = result.split("\n");
   });
   let bad_letters = [];
   // guess soare first
