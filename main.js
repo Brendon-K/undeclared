@@ -1,7 +1,10 @@
+let valid_guesses = null;
+let valid_answers = null;
+
 async function read_txt_webpage(url) {
   const response = await fetch(url);
   const data = await response.text();
-  console.log(data);
+  return data;
 }
 
 function make_guess(guess_num, word) {
