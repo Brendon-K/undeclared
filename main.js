@@ -30,7 +30,6 @@ $.when(guesses_promise, answers_promise).done(function(){
 });
 
 $(".word").children().click(function(){
-  $(this).css('background-color', '#ff0000');
   if ($(this).hasClass("definitely")) {
     $(this).removeClass("definitely");
   } else if ($(this).hasClass("maybe")) {
