@@ -13,17 +13,6 @@ function enter_guess(guess_num, word) {
   });
 }
 
-$(".word").children().click(function(){
-  if ($(this).hasClass("definitely")) {
-    $(this).removeClass("definitely");
-  } else if ($(this).hasClass("maybe")) {
-    $(this).removeClass("maybe");
-    $(this).addClass("definitely");
-  } else {
-    $(this).addClass("maybe");
-  }
-});
-
 let guesses_url = "https://raw.githubusercontent.com/Brendon-K/undeclared/main/wordle_guesses.txt"
 const guesses_promise = read_txt_webpage(guesses_url).then(function(result) {
   valid_guesses = result.split("\n");
@@ -32,6 +21,19 @@ const guesses_promise = read_txt_webpage(guesses_url).then(function(result) {
 let answers_url = "https://raw.githubusercontent.com/Brendon-K/undeclared/main/wordle_answers.txt"
 const answers_promise = read_txt_webpage(answers_url).then(function(result) {
   valid_answers = result.split("\n");
+});
+
+$(document).ready(function() {
+  $(".word").children().click(function(){
+    if ($(this).hasClass("definitely")) {
+      $(this).removeClass("definitely");
+    } else if ($(this).hasClass("maybe")) {
+      $(this).removeClass("maybe");
+      $(this).addClass("definitely");
+    } else {
+      $(this).addClass("maybe");
+    }
+  });
 });
 
 $.when(guesses_promise, answers_promise).done(function(){
