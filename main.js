@@ -51,7 +51,7 @@ function check_guess() {
     for (const j in good_letters) {
       // mark for deletion if good letter NOT found
       if (!word.includes(good_letters[j])) {
-        /* DEBUG
+        //* DEBUG
           console.log(word + " removed because it does not contain " + good_letters[j]);
         //*/
         marked_answers.push(i);
@@ -63,7 +63,7 @@ function check_guess() {
     for (const j in bad_letters) {
       // mark for deletion if bad letter found
       if (word.includes(bad_letters[j])) {
-        /* DEBUG
+        //* DEBUG
           console.log(word + " removed because it does contain " + bad_letters[j]);
         //*/
         marked_answers.push(i);
@@ -76,7 +76,7 @@ function check_guess() {
       for (const k in wrong_position[j]) {
         // mark for deletion if letter is in the wrong position
         if (word[j] == wrong_position[j][k]) {
-          /* DEBUG
+          //* DEBUG
             console.log(word + " removed because " + word[j] + " found in position " + j+1);
           //*/
           marked_answers.push(i);
@@ -89,7 +89,7 @@ function check_guess() {
     for (const j in solved_letters) {
       // mark for deletion if any solved letters do not match the word
       if (solved_letters[j] !== null && word[j] !== solved_letters[j]) {
-        /* DEBUG
+        //* DEBUG
           console.log(word + " removed because letter " + solved_letters[j] + " needs to be in position " + j+1);
         //*/
         marked_answers.push(i);
