@@ -15,8 +15,8 @@ async function read_txt_webpage(url) {
 function enter_guess(word) {
   ++current_guess;
   /* DEBUG
-    console.log(current_guess);
-    console.log("#guess" + current_guess);
+  console.log(current_guess);
+  console.log("#guess" + current_guess);
   //*/
   $("#guess" + current_guess).children().each(function(index) {
     $(this).html(word[index]);
@@ -52,7 +52,7 @@ function check_guess() {
       // mark for deletion if good letter NOT found
       if (!word.includes(good_letters[j])) {
         //* DEBUG
-          console.log(word + " removed because it does not contain " + good_letters[j]);
+        console.log(word + " removed because it does not contain " + good_letters[j]);
         //*/
         marked_answers.push(i);
         continue;
@@ -64,7 +64,7 @@ function check_guess() {
       // mark for deletion if bad letter found
       if (word.includes(bad_letters[j])) {
         //* DEBUG
-          console.log(word + " removed because it does contain " + bad_letters[j]);
+        console.log(word + " removed because it does contain " + bad_letters[j]);
         //*/
         marked_answers.push(i);
         continue;
@@ -77,7 +77,7 @@ function check_guess() {
         // mark for deletion if letter is in the wrong position
         if (word[j] == wrong_position[j][k]) {
           //* DEBUG
-            console.log(word + " removed because " + word[j] + " found in position " + parseInt(j+1));
+          console.log(word + " removed because " + word[j] + " found in position " + parseInt(j+1));
           //*/
           marked_answers.push(i);
           continue;
@@ -90,7 +90,7 @@ function check_guess() {
       // mark for deletion if any solved letters do not match the word
       if (solved_letters[j] !== null && word[j] !== solved_letters[j]) {
         //* DEBUG
-          console.log(word + " removed because letter " + solved_letters[j] + " needs to be in position " + parseInt(j+1));
+        console.log(word + " removed because letter " + solved_letters[j] + " needs to be in position " + parseInt(j+1));
         //*/
         marked_answers.push(i);
         continue;
@@ -99,13 +99,21 @@ function check_guess() {
   }
 
   // remove the marked answers
+  //* DEBUG
+  console.log("marked_answers:");
+  console.log(JSON.stringify(marked_answers));
+  //*/
   while (marked_answers.length > 0) {
     let i = marked_answers.pop();
-    valid_answers.splice(i, 1);
+    //* DEBUG
+      console.log("removing " + valid_answers[i] + " from position " i);
+    //*/
+    console.log(valid_answers.splice(i, 1) + " removed");
   }
 
-  // DEBUG: print list of current valid answers
+  //* DEBUG: print list of current valid answers
   console.log(JSON.stringify(valid_answers));
+  //*/
 }
 
 function find_word() {
