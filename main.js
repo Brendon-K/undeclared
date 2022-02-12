@@ -14,6 +14,10 @@ async function read_txt_webpage(url) {
 
 function enter_guess(word) {
   ++current_guess;
+  //* DEBUG
+    console.log(current_guess);
+    console.log("#guess" + current_guess);
+  //*/
   $("#guess" + current_guess).children().each(function(index) {
     $(this).html(word[index]);
   });
