@@ -77,7 +77,7 @@ function check_guess() {
         // mark for deletion if letter is in the wrong position
         if (word[j] == wrong_position[j][k]) {
           //* DEBUG
-            console.log(word + " removed because " + word[j] + " found in position " + j+1);
+            console.log(word + " removed because " + word[j] + " found in position " + parseInt(j+1));
           //*/
           marked_answers.push(i);
           continue;
@@ -90,7 +90,7 @@ function check_guess() {
       // mark for deletion if any solved letters do not match the word
       if (solved_letters[j] !== null && word[j] !== solved_letters[j]) {
         //* DEBUG
-          console.log(word + " removed because letter " + solved_letters[j] + " needs to be in position " + j+1);
+          console.log(word + " removed because letter " + solved_letters[j] + " needs to be in position " + parseInt(j+1));
         //*/
         marked_answers.push(i);
         continue;
