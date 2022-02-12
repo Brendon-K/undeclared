@@ -106,7 +106,7 @@ function check_guess() {
   while (marked_answers.length > 0) {
     let i = marked_answers.pop();
     //* DEBUG
-      console.log("removing " + valid_answers[i] + " from position " i);
+      console.log("removing " + valid_answers[i] + " from position " + i);
     //*/
     console.log(valid_answers.splice(i, 1) + " removed");
   }
