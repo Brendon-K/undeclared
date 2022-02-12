@@ -81,6 +81,15 @@ function check_guess() {
       }
     }
   }
+
+  // remove the marked answers
+  while (marked_answers.length > 0) {
+    let i = marked_answers.pop();
+    valid_answers.splice(i, 1);
+  }
+
+  // DEBUG: print list of current valid answers
+  console.log(valid_answers);
 }
 
 function find_word() {
