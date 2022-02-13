@@ -40,7 +40,7 @@ function check_guess() {
       // dont include in bad letters if letter is locked in elsewhere in word
       // DEBUG
       console.log($(this).html());
-      if (!solved_letters.includes($(this))) {
+      if (!solved_letters.includes($(this).html())) {
         console.log($(this).html() + " removed");
         bad_letters.push($(this).html());
       } else {
