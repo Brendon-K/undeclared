@@ -39,12 +39,12 @@ function check_guess() {
     } else {
       // dont include in bad letters if letter is locked in elsewhere in word
       // DEBUG
-      console.log($(this));
+      console.log($(this).html());
       if (!solved_letters.includes($(this))) {
-        console.log($(this) + " removed");
+        console.log($(this).html() + " removed");
         bad_letters.push($(this).html());
       } else {
-        console.log($(this) + " not removed");
+        console.log($(this).html() + " not removed");
       }
     }
   });
