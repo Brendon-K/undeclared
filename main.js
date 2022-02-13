@@ -37,7 +37,10 @@ function check_guess() {
       wrong_position[index].push($(this).html());
     // character not in final word
     } else {
-      bad_letters.push($(this).html());
+      // dont include in bad letters if letter is locked in elsewhere in word
+      if (!solved_letters.includes($(this))) {
+        bad_letters.push($(this).html());
+      }
     }
   });
 
