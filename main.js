@@ -45,6 +45,7 @@ function check_guess() {
   // order of these actions may affect execution speed
   // something to maybe consider for later
   for (const i in valid_answers) {
+    let already_marked = false;
     let word = valid_answers[i];
 
     // check if the word contains any of the good letters
@@ -55,8 +56,13 @@ function check_guess() {
         console.log(word + " removed because it does not contain " + good_letters[j]);
         //*/
         marked_answers.push(i);
-        continue;
+        already_marked = true;
+        break;
       }
+    }
+
+    if (already_marked) {
+      continue;
     }
 
     // check if the word contains any of the bad letters
@@ -67,8 +73,13 @@ function check_guess() {
         console.log(word + " removed because it does contain " + bad_letters[j]);
         //*/
         marked_answers.push(i);
-        continue;
+        already_marked = true;
+        break;
       }
+    }
+
+    if (already_marked) {
+      continue;
     }
 
     // check if any letters are in the wrong position
@@ -80,9 +91,14 @@ function check_guess() {
           console.log(word + " removed because " + word[j] + " found in position " + parseInt(j+1));
           //*/
           marked_answers.push(i);
-          continue;
+          already_marked = true;
+          break;
         }
       }
+    }
+
+    if (already_marked) {
+      continue;
     }
 
     // check if any solved letters are correct
@@ -93,7 +109,8 @@ function check_guess() {
         console.log(word + " removed because letter " + solved_letters[j] + " needs to be in position " + parseInt(j+1));
         //*/
         marked_answers.push(i);
-        continue;
+        already_marked = true;
+        break;
       }
     }
   }
