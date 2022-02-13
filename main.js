@@ -38,13 +38,8 @@ function check_guess() {
     // character not in final word
     } else {
       // dont include in bad letters if letter is locked in elsewhere in word
-      // DEBUG
-      console.log($(this).html());
       if (!solved_letters.includes($(this).html())) {
-        console.log($(this).html() + " removed");
         bad_letters.push($(this).html());
-      } else {
-        console.log($(this).html() + " not removed");
       }
     }
   });
