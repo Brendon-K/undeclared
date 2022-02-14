@@ -119,13 +119,13 @@ function check_guess() {
   }
 
   // remove the marked answers
-  //* DEBUG
+  /* DEBUG
   console.log("marked_answers:");
   console.log(JSON.stringify(marked_answers));
   //*/
   while (marked_answers.length > 0) {
     let i = marked_answers.pop();
-    //* DEBUG
+    /* DEBUG
       console.log("removing " + valid_answers[i] + " from position " + i);
     //*/
     console.log(valid_answers.splice(i, 1) + " removed");
