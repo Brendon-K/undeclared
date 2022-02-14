@@ -174,5 +174,5 @@ $(document).ready(function() {
 
 $.when(guesses_promise, answers_promise).done(function(){
   // guess soare first
-  enter_guess("soare");
+  enter_guess("SOARE");
 });
