@@ -129,6 +129,7 @@ function check_guess() {
     console.log("removing " + valid_answers[i] + " from position " + i);
     console.log(valid_answers.splice(i, 1) + " removed");
     //*/
+    valid_answers.splice(i, 1);
   }
 
   //* DEBUG: print list of current valid answers
