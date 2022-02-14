@@ -19,7 +19,7 @@ function enter_guess(word) {
   console.log("#guess" + current_guess);
   //*/
   $("#guess" + current_guess).children().each(function(index) {
-    $(this).html(word[index].toUpperCase());
+    $(this).html(word[index]);
   });
 }
 
