@@ -1,7 +1,28 @@
+.disable-select {
+  user-select: none; /* supported by Chrome and Opera */
+  -webkit-user-select: none; /* Safari */
+  -khtml-user-select: none; /* Konqueror HTML */
+  -moz-user-select: none; /* Firefox */
+  -ms-user-select: none; /* Internet Explorer/Edge */
+
+}
+
 .maybe {
   background-color: #FFFF00;
 }
 
 .definitely {
   background-color: #00FF00;
+}
+
+.letter {
+  box-sizing: border-box;
+  display: inline-block;
+  font-size: 4em;
+  width: 2em;
+  height: 2em;
+  padding-top: .3em;
+  border-style: solid;
+  border-width: 1px;
+  text-align: center;
 }
