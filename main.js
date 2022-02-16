@@ -27,18 +27,64 @@ function check_guess() {
   let marked_answers = [];
   let marked_guesses = [];
   // check the state of every character
+  //* DEBUG
+  console.log("good letters: " + good_letters);
+  console.log("wrong position letters: " + wrong_position);
+  console.log("bad letters: " + bad_letters);
+  //*/
   $("#guess" + current_guess).children().each(function(index) {
     // character in the correct position
     if ($(this).hasClass("definitely")) {
+      // remove from bad letters if listed in there
+      if (bad_letters.includes($(this).html())) {
+        let i = bad_letters.indexOf($(this).html());
+        //* DEBUG 
+        console.log("Removing " + $(this).html() + " from list of bad letters");
+        //*/
+        bad_letters.splice(i, 1);
+      }
+      //* DEBUG
+      console.log("Adding " + $(this).html() + " to list of solved letters in position " + index);
+      //*/
       solved_letters[index] = $(this).html();
     // character not in correct position, but somewhere in the word
     } else if ($(this).hasClass("maybe")) {
+      // remove from bad letters if listed in there
+      if (bad_letters.includes($(this).html())) {
+        let i = bad_letters.indexOf($(this).html());
+        //* DEBUG 
+        console.log("Removing " + $(this).html() + " from list of bad letters");
+        //*/
+        bad_letters.splice(i, 1);
+      }
+      //* DEBUG
+      console.log("Adding " + $(this).html() + " to list of good letters");
+      console.log("Adding " + $(this).html() + " to list of wrong position letters in position " + index);
+      //*/
       good_letters.push($(this).html());
       wrong_position[index].push($(this).html());
     // character not in final word
     } else {
-      // dont include in bad letters if letter is locked in elsewhere in word
-      if (!solved_letters.includes($(this).html())) {
+      // check if letter is in list of wrong position letters
+      let is_wrong_position = false;
+      for (i in wrong_position) {
+        if (wrong_position[i].includes($(this).html())) {
+          is_wrong_position = true;
+        }
+      }
+      if (is_wrong_position) {
+        let i = bad_letters.indexOf($(this).html());
+        //* DEBUG
+        console.log("removing " + $(this).html() + " from list of bad letters because it's just in the wrong position");
+        //*/
+        bad_letters.splice(i, 1);
+        // add the letter to wrong position list because this one is *also* in the wrong position
+        wrong_position[index].push($(this).html());
+      // don't include in bad letters if letter is locked in elsewhere in word
+      } else if (!solved_letters.includes($(this).html())) {
+        //* DEBUG
+        console.log("Adding " + $(this).html() + " to list of bad letters");
+        //*/
         bad_letters.push($(this).html());
       }
     }
@@ -91,12 +137,15 @@ function check_guess() {
         // mark for deletion if letter is in the wrong position
         if (word[j] == wrong_position[j][k]) {
           //* DEBUG
-          console.log(word + " removed because " + word[j] + " found in position " + parseInt(j+1));
+          console.log(word + " removed because " + word[j] + " found in position " + 1*j+1);
           //*/
           marked_answers.push(i);
           already_marked = true;
           break;
         }
+      }
+      if (already_marked) {
+        break;
       }
     }
 
@@ -142,6 +191,48 @@ function find_word() {
   return valid_answers[Math.floor(Math.random() * valid_answers.length)];
 }
 
+function keyboard_input(key_press) {
+  let element = null;
+  // delete last character
+  if (key_press == "DEL") {
+    let last_letter = 0;  
+    // find the last character
+    $("#guess" + parseInt(current_guess + 1)).children().each(function(index) {
+      if ($(this).html() !== "" && last_letter < 5) {
+        ++last_letter;
+        /* DEBUG
+        console.log("last letter: " + last_letter);
+        //*/
+      }
+    });
+    // remove the last character
+    if (last_letter !== 0) {
+      let current_letter = 0;
+      $("#guess" + parseInt(current_guess + 1)).children().each(function(index) {
+        ++current_letter;
+        /* DEBUG
+        console.log("current letter " + current_letter);
+        //*/
+        if (current_letter == last_letter) {
+          $(this).html("");
+        }
+      });
+    }
+  // enter new character
+  } else {
+    $("#guess" + parseInt(current_guess + 1)).children().each(function(index) {
+      // find the first empty box
+      if ($(this).html() == "") {
+        if (element == null) {
+          element = this;
+        }
+      }
+    });
+    // enter a letter in the box
+    $(element).html(key_press);
+  }
+}
+
 let guesses_url = "wordle_guesses.txt"
 const guesses_promise = read_txt_webpage(guesses_url).then(function(result) {
   valid_guesses = result.split("\n");
@@ -174,6 +265,7 @@ $(document).ready(function() {
 });
 
 $.when(guesses_promise, answers_promise).done(function(){
-  // guess soare first
-  enter_guess("SOARE");
+  //* DEBUG
+  enter_guess("FLOOD");
+  //*/
 });
