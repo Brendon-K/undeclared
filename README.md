@@ -4,10 +4,10 @@ This application will suggest words that you should guess in the game Wordle, le
 
 ### TODO
 
-- [ ] Fix issues with repeating letters
+- [x] Fix issues with repeating letters
 - [ ] Allow users to enter their own words for a game in progress
-  - [ ] Make keyboard prettier
   - [ ] Fix alignment issues when entering text
+  - [ ] Make keyboard prettier
 - [ ] Guess better words maybe
 - [ ] Make page prettier
 - [ ] Allow keyboard commands (typing, backspace, enter)
