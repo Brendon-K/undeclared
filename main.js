@@ -142,12 +142,12 @@ function find_word() {
   return valid_answers[Math.floor(Math.random() * valid_answers.length)];
 }
 
-let guesses_url = "https://raw.githubusercontent.com/Brendon-K/undeclared/main/wordle_guesses.txt"
+let guesses_url = "wordle_guesses.txt"
 const guesses_promise = read_txt_webpage(guesses_url).then(function(result) {
   valid_guesses = result.split("\n");
 });
 
-let answers_url = "https://raw.githubusercontent.com/Brendon-K/undeclared/main/wordle_answers.txt"
+let answers_url = "wordle_answers.txt"
 const answers_promise = read_txt_webpage(answers_url).then(function(result) {
   valid_answers = result.split("\n");
 });
