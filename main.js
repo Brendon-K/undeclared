@@ -265,7 +265,7 @@ $(document).ready(function() {
 });
 
 $.when(guesses_promise, answers_promise).done(function(){
-  //* DEBUG
+  /* DEBUG
   enter_guess("FLOOD");
   //*/
 });
