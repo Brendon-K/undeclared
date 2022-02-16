@@ -20,6 +20,22 @@ function enter_guess(word) {
   //*/
   $("#guess" + current_guess).children().each(function(index) {
     $(this).html(word[index]);
+    // mark letter correct if it was correct before
+    if (current_guess > 1) {
+      let was_correct = false;
+      // check if it was correct before
+      $("#guess" + parseInt(1*current_guess - 1)).children().each(function(jndex) {
+        if (index == jndex) {
+          // it was correct before
+          if ($(this).hasClass("definitely")) {
+            was_correct = true;
+          }
+        }
+      });
+      if (was_correct) {
+        $(this).addClass("definitely");
+      }
+    }
   });
 }
 
@@ -79,6 +95,9 @@ function check_guess() {
         //*/
         bad_letters.splice(i, 1);
         // add the letter to wrong position list because this one is *also* in the wrong position
+        //* DEBUG
+        console.log("Adding " + $(this).html() + " to list of wrong position letters in position " + index);
+        //*/
         wrong_position[index].push($(this).html());
       // don't include in bad letters if letter is locked in elsewhere in word
       } else if (!solved_letters.includes($(this).html())) {
@@ -268,4 +287,6 @@ $.when(guesses_promise, answers_promise).done(function(){
   /* DEBUG
   enter_guess("FLOOD");
   //*/
+  // enter a guess to start (just for now)
+  enter_guess(find_word());
 });
