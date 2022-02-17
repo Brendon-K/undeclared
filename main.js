@@ -12,6 +12,16 @@ async function read_txt_webpage(url) {
   return data;
 }
 
+let guesses_url = "wordle_guesses.txt"
+const guesses_promise = read_txt_webpage(guesses_url).then(function(result) {
+  valid_guesses = result.split("\n");
+});
+
+let answers_url = "wordle_answers.txt"
+const answers_promise = read_txt_webpage(answers_url).then(function(result) {
+  valid_answers = result.split("\n");
+});
+
 function enter_guess(word) {
   ++current_guess;
   /* DEBUG
@@ -195,7 +205,6 @@ function check_guess() {
     let i = marked_answers.pop();
     /* DEBUG
     console.log("removing " + valid_answers[i] + " from position " + i);
-    console.log(valid_answers.splice(i, 1) + " removed");
     //*/
     valid_answers.splice(i, 1);
   }
@@ -207,7 +216,11 @@ function check_guess() {
 
 function find_word() {
   // just return a random word for now
-  return valid_answers[Math.floor(Math.random() * valid_answers.length)];
+  let index = Math.floor(Math.random() * valid_answers.length)
+  let word = valid_answers[index];
+  // remove from word list before returning
+  valid_answers.splice(index, 1);
+  return word;
 }
 
 function keyboard_input(key_press) {
@@ -252,16 +265,6 @@ function keyboard_input(key_press) {
   }
 }
 
-let guesses_url = "wordle_guesses.txt"
-const guesses_promise = read_txt_webpage(guesses_url).then(function(result) {
-  valid_guesses = result.split("\n");
-});
-
-let answers_url = "wordle_answers.txt"
-const answers_promise = read_txt_webpage(answers_url).then(function(result) {
-  valid_answers = result.split("\n");
-});
-
 $(document).ready(function() {
   // change letter class when clicked
   $(".word").children().click(function() {
@@ -279,13 +282,14 @@ $(document).ready(function() {
   $("#next_guess").click(function() {
     check_guess();
     let new_guess = find_word();
+
     enter_guess(new_guess);
   });
 });
 
 $.when(guesses_promise, answers_promise).done(function(){
   /* DEBUG
-  enter_guess("FLOOD");
+  enter_guess("TURBO");
   //*/
   // enter a guess to start (just for now)
   enter_guess(find_word());
