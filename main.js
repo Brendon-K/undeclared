@@ -265,6 +265,47 @@ function keyboard_input(key_press) {
   }
 }
 
+function validate_guess(word) {
+  $("#guess" + current_guess).children().each(function(index) {
+    // mark as definitely
+    if ($(this).html() == word[index]) {
+      //* DEBUG
+      console.log("Marking as definitely because " + word[index] + " found in position " + index);
+      //*/
+      $(this).addClass("definitely")
+    // mark as maybe
+    } else if (word.includes($(this).html())) {
+      console.log("Marking as maybe because " + $(this).html() + " found in word");
+      $(this).addClass("maybe");
+    }
+  });
+}
+
+function submit_word() {
+  // validate the word in the text box
+  let word = $("#target_word").val().toUpperCase();
+  console.log(word);
+  // check if it's 5 characters
+  // TODO this should be removed later and replaced with actual input validation
+  if (word.length !== 5) {
+    console.log("Word length not valid");
+    return;
+  }
+  // check if the word is a valid answer
+  if (!valid_answers.includes(word)) {
+    console.log("Word isn't a valid answer");
+    return;
+  }
+
+  // word is valid so now solve it
+  // make a guess
+  enter_guess(find_word());
+
+  // check the guess
+  validate_guess(word);
+  check_guess();
+}
+
 $(document).ready(function() {
   // change letter class when clicked
   $(".word").children().click(function() {
@@ -292,5 +333,5 @@ $.when(guesses_promise, answers_promise).done(function(){
   enter_guess("TURBO");
   //*/
   // enter a guess to start (just for now)
-  enter_guess(find_word());
+  //enter_guess(find_word());
 });
