@@ -11,6 +11,10 @@
 <body class="disable-select">
   <div>
     <button type="button" id="next_guess">New Guess</button>
+    <form>
+      <input type="text" id="target_word" label="Target Word"/>
+      <button type="button" onclick="submit_word()">Submit Word</button>
+    </form>  
   </div>
   <div class="word" id="guess1">
     <span class="letter"></span>
@@ -77,7 +81,6 @@
       <input type="button" class="virtual_key" id="G" value="G" onclick="keyboard_input(this.id);" />
       <input type="button" class="virtual_key" id="H" value="H" onclick="keyboard_input(this.id);" />
       <input type="button" class="virtual_key" id="J" value="J" onclick="keyboard_input(this.id);" />
-      <input type="button" class="virtual_key" id="K" value="K" onclick="keyboard_input(this.id);" />
       <input type="button" class="virtual_key" id="K" value="K" onclick="keyboard_input(this.id);" />
       <input type="button" class="virtual_key" id="L" value="L" onclick="keyboard_input(this.id);" />
     </div>
