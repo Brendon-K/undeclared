@@ -282,6 +282,10 @@ function validate_guess(word) {
 }
 
 function submit_word() {
+  // only do if no guesses
+  if (current_guess > 0) {
+    return;
+  }
   // validate the word in the text box
   let word = $("#target_word").val().toUpperCase();
   console.log(word);
@@ -300,7 +304,7 @@ function submit_word() {
   // word is valid so now solve it
   // make a guess
 
-  // check the guess
+  // solve it
   let answer_found = false;
   while (current_guess < 6 && answer_found == false) {
     let guess = find_word();
@@ -328,8 +332,34 @@ $(document).ready(function() {
 
   // get the next guess when button is clicked
   $("#next_guess").click(function() {
+    // check if a word has been entered by the user
+    let users_word = "";
+    let users_word_is_valid = false;
+    $("#guess" + parseInt(current_guess + 1)).children().each(function() {
+      users_word = users_word.concat($(this).html());
+    });
+    //* DEBUG
+    console.log("entered word is: " + users_word);
+    //*/
+    // check if word is valid
+    if (users_word.length !== 5) {
+      console.log("Entered word is not correct length.");
+    } else if (!valid_guesses.includes(users_word) && !valid_answers.includes(users_word)) {
+      console.log("Entered word is not a valid guess");
+    // word is probably valid unless I missed some constraint
+    } else {
+      users_word_is_valid = true;
+    }
     check_guess();
-    let new_guess = find_word();
+
+    let new_guess = "";
+    // use submitted word if it's valid
+    if (users_word_is_valid) {
+      new_guess = users_word;
+    // find new word otherwise
+    } else {
+      new_guess = find_word();
+    }
 
     enter_guess(new_guess);
   });
