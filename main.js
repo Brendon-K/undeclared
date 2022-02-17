@@ -299,11 +299,18 @@ function submit_word() {
 
   // word is valid so now solve it
   // make a guess
-  enter_guess(find_word());
 
   // check the guess
-  validate_guess(word);
-  check_guess();
+  let answer_found = false;
+  while (current_guess < 6 && answer_found == false) {
+    let guess = find_word();
+    enter_guess(guess);
+    validate_guess(word);
+    check_guess();
+    if (word == guess) {
+      answer_found = true;
+    }
+  }
 }
 
 $(document).ready(function() {
