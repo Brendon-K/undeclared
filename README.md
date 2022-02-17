@@ -15,4 +15,5 @@ This application will suggest words that you should guess in the game Wordle, le
 - [ ] Guess better words maybe
 - [ ] Make page prettier
 - [ ] Allow keyboard commands (typing, backspace, enter)
-- [ ] Allow user submitted word to see how the program solves it
+- [x] Allow user submitted word to see how the program solves it
+  - [ ] Make validation more accurate to how to would be in a real game
