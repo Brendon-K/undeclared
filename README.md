@@ -8,6 +8,7 @@ This application will suggest words that you should guess in the game Wordle, le
 
 - [x] Fix issues with repeating letters
 - [x] Automatically mark letter as correct in new guesses if it was correct before
+- [x] Remove newest guess from valid word list immediately
 - [ ] Allow users to enter their own words for a game in progress
   - [ ] Fix alignment issues when entering text
   - [ ] Align keyboard buttons so it looks more like an actual keyboard
