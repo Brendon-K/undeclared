@@ -16,7 +16,9 @@
 }
 
 .word {
-  box-sizing: border-box;
+  display: flex;
+  padding-top: .5em;
+  gap: .5em;
 }
 
 .letter {
@@ -30,4 +32,3 @@
   border-width: 1px;
   text-align: center;
 }
-
