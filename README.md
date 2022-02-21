@@ -15,7 +15,9 @@ This application will suggest words that you should guess in the game Wordle, le
   - [ ] Fix having to press button twice to enter a manual guess
 - [ ] Guess better words maybe
 - [ ] Make page prettier
-- [ ] Allow keyboard commands (typing, backspace, enter)
+- [x] Allow keyboard commands (typing, backspace)
+  - [ ] Let user hit enter to go to next guess  
+  (I don't actually know if I'll do this just because you have to click the squares first before submitting your guess anyways, so it seems pointless, but adding it to the to do list anyways)
 - [x] Allow user submitted word to see how the program solves it
   - [ ] Make validation more accurate to how to would be in a real game
   - [ ] Actually validate the input correctly instead of doing it like a weirdo
