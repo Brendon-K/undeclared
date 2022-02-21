@@ -53,11 +53,6 @@ function check_guess() {
   let marked_answers = [];
   let marked_guesses = [];
   // check the state of every character
-  //* DEBUG
-  console.log("good letters: " + good_letters);
-  console.log("wrong position letters: " + wrong_position);
-  console.log("bad letters: " + bad_letters);
-  //*/
   $("#guess" + current_guess).children().each(function(index) {
     // character in the correct position
     if ($(this).hasClass("definitely")) {
@@ -117,6 +112,11 @@ function check_guess() {
         bad_letters.push($(this).html());
       }
     }
+    //* DEBUG
+    console.log("good letters: " + good_letters);
+    console.log("wrong position letters: " + wrong_position);
+    console.log("bad letters: " + bad_letters);
+    //*/
   });
 
   // remove stuff from valid if it conflicts with the guess
@@ -363,6 +363,21 @@ $(document).ready(function() {
 
     enter_guess(new_guess);
   });
+
+  $(this).keydown(function(e) {
+      // unclear if this line is needed
+      //e.preventDefault();
+      // don't input letter if typing in text box
+      if ($(e.target).closest("#target_word")[0]) {
+        return;
+      }
+
+      if (e.keyCode >= 60 && e.keyCode <= 90) {
+        keyboard_input(e.key.toUpperCase());
+      } else if (e.key == "Backspace") {
+        keyboard_input("DEL");
+      }
+    });
 });
 
 $.when(guesses_promise, answers_promise).done(function(){
