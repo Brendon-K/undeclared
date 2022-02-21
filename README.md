@@ -12,6 +12,7 @@ This application will suggest words that you should guess in the game Wordle, le
 - [x] Allow users to enter their own words for a game in progress
   - [x] Fix alignment issues when entering text
   - [ ] Align keyboard buttons so it looks more like an actual keyboard
+  - [ ] Fix having to press button twice to enter a manual guess
 - [ ] Guess better words maybe
 - [ ] Make page prettier
 - [ ] Allow keyboard commands (typing, backspace, enter)
